@@ -1,0 +1,441 @@
+﻿body {
+    background: #282828;
+    color: #000;
+}
+
+/*Modal Details for Music Player*/
+.modal-dialog {
+    max-width: 800px;
+    max-height: 600px;
+    margin: 30px auto;
+}
+
+.modal-body {
+    position: relative;
+    padding: 0px;
+}
+
+.close {
+    position: absolute;
+    right: -30px;
+    top: 0;
+    z-index: 999;
+    font-size: 2rem;
+    font-weight: normal;
+    color: #fff;
+    opacity: 1;
+    color: #ff0000;
+}
+
+    .close:hover {
+        color: yellow;
+    }
+
+.swiper-container-book {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+    .swiper-container-book h2 {
+        color: darkorange;
+        font-weight: bold;
+        /*padding-left: 10px;*/
+        /*border-left: 10px solid #ff0000*/
+    }
+
+    .swiper-container-book h3 {
+        color: #ff0000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .swiper-container-book h4 {
+        color: white;
+        font-weight: bold;
+        padding-left: 10px;
+        border-left: 10px solid #ff0000;
+    }
+
+    .swiper-container-book p {
+        color: darkgray;
+    }
+
+.swiper-slide-book {
+    background-position: center;
+    background-size: auto;
+    width: 325px;
+    height: 450px;
+    background: #212121;
+}
+
+    .swiper-slide-book:hover {
+        /*border-style: ridge;
+    border-color: darkorange;*/
+    }
+
+    .swiper-slide-book .imgBox {
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+    }
+
+        .swiper-slide-book .imgBox img {
+            width: 100%;
+        }
+
+    .swiper-slide-book .details {
+        padding: 10px;
+    }
+
+    .swiper-slide-book .watch-container {
+    }
+
+        .swiper-slide-book .watch-container .button-group {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+
+            .swiper-slide-book .watch-container .button-group button {
+                background-color: #333333;
+                border: 2px solid #333333;
+                border-radius: 5px;
+                color: #5799ef;
+                width: 100%;
+                padding: 5px;
+                text-align: center;
+                text-decoration: none;
+                transition-duration: 0.4s;
+                display: inline-block;
+                font-size: 16px;
+                font-weight: 700;
+                font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+                cursor: pointer;
+            }
+
+                .swiper-slide-book .watch-container .button-group button:hover {
+                    background-color: #4c4c4c;
+                    color: white;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+
+            .swiper-slide-book .watch-container .button-group .buttonvideo {
+                background-color: #333333;
+                border: 2px solid #333333;
+                border-radius: 5px;
+                color: darkorange;
+                width: 100%;
+                padding: 5px;
+                text-align: center;
+                text-decoration: none;
+                transition-duration: 0.4s;
+                display: inline-block;
+                font-size: 16px;
+                font-weight: bold;
+                font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+                cursor: pointer;
+            }
+
+                .swiper-slide-book .watch-container .button-group .buttonvideo:hover {
+                    background-color: #4c4c4c;
+                    color: white;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+
+            .swiper-slide-book .watch-container .button-group audio {
+                font-size: 19px;
+                color: #f44336;
+                font-weight: 700;
+                width: 100%;
+                text-align: center;
+                display: inline-block;
+            }
+
+            .swiper-slide-book .watch-container .button-group span {
+                font-size: 19px;
+                color: #f44336;
+                font-weight: 700;
+                width: 100%;
+                text-align: center;
+                display: inline-block;
+            }
+
+    .swiper-slide-book .button-container {
+        padding: inherit;
+    }
+
+        .swiper-slide-book .button-container button {
+            position: absolute;
+            bottom: 0;
+            background-color: #262626;
+            border: 2px solid #f44336;
+            border-radius: 12px;
+            color: #5799ef;
+            width: 100%;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            transition-duration: 0.4s;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            cursor: pointer;
+        }
+
+            .swiper-slide-book .button-container button:hover {
+                background-color: #f44336;
+                color: white;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+
+    .swiper-slide-book .details h3 {
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        text-align: center;
+        line-height: 20px;
+        color: white;
+    }
+
+        .swiper-slide-book .details h3:hover {
+            color: #f44336;
+            font-size: 21px;
+        }
+
+        .swiper-slide-book .details h3 span {
+            font-size: 16px;
+            color: #f44336;
+        }
+
+.page-book-zero {
+}
+
+.swiper-container-book-genre {
+    width: 100%;
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+    .swiper-container-book-genre h2 {
+        color: darkorange;
+        font-weight: bold;
+        /*padding-left: 10px;*/
+        /*border-left: 10px solid #ff0000*/
+    }
+
+    .swiper-container-book-genre h3 {
+        color: #ff0000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .swiper-container-book-genre h4 {
+        color: white;
+        font-weight: bold;
+        padding-left: 10px;
+        border-left: 10px solid #ff0000;
+    }
+
+    .swiper-container-book-genre p {
+        color: darkgray;
+    }
+
+.swiper-slide-book-genre {
+    background-position: center;
+    background-size: cover;
+    width: 325px;
+    height: 450px;
+    background: #212121;
+}
+
+    .swiper-slide-book-genre:hover {
+        /*border-style: ridge;
+    border-color: darkorange;*/
+    }
+
+    .swiper-slide-book-genre .imgBox {
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+    }
+
+        .swiper-slide-book-genre .imgBox img {
+            width: 100%;
+        }
+
+    .swiper-slide-book-genre .details {
+        padding: 10px;
+    }
+
+    .swiper-slide-book-genre .watch-container {
+    }
+
+        .swiper-slide-book-genre .watch-container .button-group {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+        }
+
+            .swiper-slide-book-genre .watch-container .button-group button {
+                background-color: #333333;
+                border: 2px solid #333333;
+                border-radius: 5px;
+                color: #5799ef;
+                width: 100%;
+                padding: 5px;
+                text-align: center;
+                text-decoration: none;
+                transition-duration: 0.4s;
+                display: inline-block;
+                font-size: 16px;
+                font-weight: 700;
+                font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+                cursor: pointer;
+            }
+
+                .swiper-slide-book-genre .watch-container .button-group button:hover {
+                    background-color: #4c4c4c;
+                    color: white;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+
+            .swiper-slide-book-genre .watch-container .button-group .buttonvideo {
+                background-color: #333333;
+                border: 2px solid #333333;
+                border-radius: 5px;
+                color: darkorange;
+                width: 100%;
+                padding: 5px;
+                text-align: center;
+                text-decoration: none;
+                transition-duration: 0.4s;
+                display: inline-block;
+                font-size: 16px;
+                font-weight: bold;
+                font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+                cursor: pointer;
+            }
+
+                .swiper-slide-book-genre .watch-container .button-group .buttonvideo:hover {
+                    background-color: #4c4c4c;
+                    color: white;
+                    font-size: 16px;
+                    font-weight: bold;
+                }
+
+            .swiper-slide-book-genre .watch-container .button-group audio {
+                font-size: 19px;
+                color: #f44336;
+                font-weight: 700;
+                width: 100%;
+                text-align: center;
+                display: inline-block;
+            }
+
+            .swiper-slide-book-genre .watch-container .button-group span {
+                font-size: 19px;
+                color: #f44336;
+                font-weight: 700;
+                width: 100%;
+                text-align: center;
+                display: inline-block;
+            }
+
+    .swiper-slide-book-genre .button-container {
+        padding: inherit;
+    }
+
+        .swiper-slide-book-genre .button-container button {
+            position: absolute;
+            bottom: 0;
+            background-color: #262626;
+            border: 2px solid #f44336;
+            border-radius: 12px;
+            color: #5799ef;
+            width: 100%;
+            padding: 5px;
+            text-align: center;
+            text-decoration: none;
+            transition-duration: 0.4s;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+            cursor: pointer;
+        }
+
+            .swiper-slide-book-genre .button-container button:hover {
+                background-color: #f44336;
+                color: white;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+
+    .swiper-slide-book-genre .details h3 {
+        margin: 0;
+        padding: 0;
+        font-size: 20px;
+        text-align: center;
+        line-height: 20px;
+        color: white;
+    }
+
+        .swiper-slide-book-genre .details h3:hover {
+            color: #f44336;
+            font-size: 21px;
+        }
+
+        .swiper-slide-book-genre .details h3 span {
+            font-size: 16px;
+            color: #f44336;
+        }
+
+.page-book-one {
+}
+
+/* Watch Recommendation Title */
+.selected-book {
+}
+
+    .selected-book h3 {
+        color: #ff0000;
+        font-size: 35px;
+        font-weight: bold;
+    }
+
+    .selected-book h4 {
+        color: #ff0000;
+        font-weight: bold;
+    }
+
+/* Display book in View */
+.display-book-section {
+}
+
+    .display-book-section h1 {
+        color: #e50914;
+        font-weight: bold;
+    }
+
+    .display-book-section h2 {
+        color: #e50914;
+        font-weight: bold;
+    }
+
+    .display-book-section h3 {
+        color: #e50914;
+        font-weight: bold;
+    }
+
+    .display-book-section h4 {
+        color: #e50914;
+        font-weight: bold;
+    }

@@ -1,0 +1,9 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\Gorilla Rig\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\Gorilla Rig\\.nuget\\packages",
+      "C:\\Microsoft\\Xamarin\\NuGet"
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Clam.Areas.TVShows.Models.SectionTVShowCategory>
+
+@{
+    ViewData["Title"] = "Genre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Content = ViewBag.Content;
+    var Path = ViewBag.Path;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Genres</li>
+    </ol>
+</nav>
+<div>
+    @Html.ActionLink("Create Genre", "CreateGenre", "TVShow", null, new { @class = "btn btn-success rounded" })
+</div>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <br />
+            <div class="row no-gutters bg-light position-relative">
+                <div class="col-md-6 mb-md-0 p-md-4">
+                    <img src="~/AfpIData/@item.ItemPath" class="w-100" alt="...">
+                </div>
+                <div class="col-md-6 position-static p-4 pl-md-0">
+                    <h3 class="mt-0">@item.Genre</h3><br />
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <b>@Html.DisplayNameFor(model => model.SubCategoryCount) :</b> @Html.DisplayFor(modelItem => item.SubCategoryCount)<br />
+                        </li>
+                        <li class="list-group-item">
+                            <b>@Html.DisplayNameFor(model => model.SubCategorySeasonCount) :</b> @Html.DisplayFor(modelItem => item.SubCategorySeasonCount)<br />
+                        </li>
+                        <li class="list-group-item">
+                            <b>@Html.DisplayNameFor(model => model.SubCategorySeasonItemCount) :</b> @Html.DisplayFor(modelItem => item.SubCategorySeasonItemCount)<br />
+                        </li>
+                    </ul>
+                    @Html.ActionLink("Select", "TVShows", new { id = item.CategoryId, category = item.UrlCategory }, new { @class = "btn btn-primary stretched-link mt-auto" })
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary float-right" data-toggle="collapse" data-target="#@item.Genre.Replace(" ",  "")">Options</button>
+                <div id="@item.Genre.Replace(" ",  "")" class="collapse">
+                    @Html.ActionLink("Delete", "DeleteGenre", new { id = item.CategoryId, category = item.UrlCategory }, new { @class = "btn btn-secondary float-right" })
+                    @Html.ActionLink("Details", "GenreDetails", new { id = item.CategoryId, category = item.UrlCategory }, new { @class = "btn btn-secondary float-right" })
+                    @Html.ActionLink("Edit", "EditGenre", new { id = item.CategoryId, category = item.UrlCategory }, new { @class = "btn btn-secondary float-right" })
+                </div>
+                <footer class="blockquote-footer float-left">Last Modified: <cite>@item.LastModified</cite></footer>
+                <br />
+                <footer class="blockquote-footer">Added: <cite>@item.DateCreated</cite></footer>
+            </div><br />
+        </td>
+    </tr>
+}

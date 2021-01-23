@@ -1,0 +1,63 @@
+﻿@model Clam.Areas.Academia.Models.SectionRegister
+@{
+    ViewData["Title"] = "EditSection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var UrlCategory = ViewBag.UrlCategory;
+    var UrlSection = ViewBag.UrlSection;
+    var SectionName = ViewBag.SectionName;
+    var CategoryName = ViewBag.CategoryName;
+    var Name = ViewBag.Name;
+    var Aid = ViewBag.Aid;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/academia/manage">Academic Categories</a></li>
+        <li class="breadcrumb-item"><a href="/academia/manage/@UrlCategory/list/@Aid">@CategoryName</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit @SectionName</li>
+    </ol>
+</nav>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        @using (Html.BeginForm(actionName: "EditSection", "Academia", method: FormMethod.Post, new { id = Aid, category = UrlCategory, section = UrlSection }))
+        {
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.ValidationSummary(message: "Ensure Field is filled in by specific requirements.", htmlAttributes: new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.AcademicId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.AcademicId, null, new { @class = "form-control", @hidden = "hidden" })
+                    @Html.ValidationMessageFor(model => model.AcademicId, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.SubCategoryId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.SubCategoryId, null, new { @class = "form-control", @hidden = "hidden" })
+                    @Html.ValidationMessageFor(model => model.SubCategoryId, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.SubCategoryTitle, null, new { @class = "col-md-4 col-form-label control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.SubCategoryTitle, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubCategoryTitle, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.SubCategoryDescription, null, new { @class = "col-md-4 col-form-label control-label" })
+                <div class="col-md-8">
+                    @Html.TextAreaFor(model => model.SubCategoryDescription, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.SubCategoryDescription, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

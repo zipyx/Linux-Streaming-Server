@@ -1,0 +1,25 @@
+﻿@model Clam.Areas.Storage.Models.AreaUserPersonalCategoryItems
+@{
+    ViewData["Title"] = "Open";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/storage/storage.css" />
+}
+<br />
+<br />
+<div class="selected-book">
+    <h3 style="color:whitesmoke;">@Html.DisplayFor(model => model.FileName)</h3><br />
+    <div id="some-element">
+        <div class="video-frame table-responsive-sm">
+            <iframe id="videoplayer" width="1110" height="700" class="embed-responsive object-fit_fill" src="~/AfpSData/@Model.ItemPath" controls>
+            </iframe>
+        </div>
+    </div>
+</div>
+
+<div class="table-storage-color">
+    <a href="/storage">
+        <h4>Return</h4>
+    </a>
+</div>

@@ -1,0 +1,59 @@
+﻿@model Clam.Areas.Tickets.Models.TicketHome
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Tickets</li>
+    </ol>
+</nav>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalForm">
+    Create Ticket
+</button><br />
+
+<!-- Modal -->
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="notify-modal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="notify-modal">Log Ticket</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm(actionName: "Create", controllerName: "Ticket", method: FormMethod.Post))
+                {
+                    @Html.ValidationSummary(message: "Please be accurate, simple and to the point.", htmlAttributes: new { @class = "text-danger" })
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.TicketModel.TicketTitle, null, new { @class = "col-md-4 col-form-label control-label" })
+                        <div class="col-md-8">
+                            @Html.TextBoxFor(model => model.TicketModel.TicketTitle, null, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TicketModel.TicketTitle, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        @Html.LabelFor(model => model.TicketModel.TicketMessage, null, new { @class = "col-md-4 col-form-label control-label" })
+                        <div class="col-md-8">
+                            @Html.TextAreaFor(model => model.TicketModel.TicketMessage, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.TicketModel.TicketMessage, null, new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    @*@Html.Partial("_IndexPartial")*@
+    @await Html.PartialAsync("_IndexPartial")
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

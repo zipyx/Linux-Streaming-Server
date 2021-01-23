@@ -1,0 +1,48 @@
+﻿@model Clam.Areas.Academia.Models.SectionAcademicRegister
+@{ var Name = ViewBag.Name;}
+@{
+    ViewData["Title"] = "CategoryDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var UrlGenre = ViewBag.UrlGenre;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/academia/manage">Academic Categories</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Name Details </li>
+    </ol>
+</nav>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AcademicId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AcademicId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AcademicDisciplineTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AcademicDisciplineTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AcademicDisciplineDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AcademicDisciplineDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastModified)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastModified)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateAdded)
+        </dd>
+    </dl>
+</div>

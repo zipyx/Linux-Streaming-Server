@@ -1,0 +1,114 @@
+﻿@model Clam.Areas.EBooks.Models.ReadBook
+@{
+    ViewData["Title"] = "Read";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var BookPath = ViewBag.BookPath;
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/books/books.css" />
+}
+<br />
+<br />
+<div class="selected-book">
+    <h3>@Html.DisplayFor(model => model.BookTitle)</h3><br />
+    <div id="some-element">
+        <div class="video-frame table-responsive-sm">
+            <iframe id="videoplayer" width="1110" height="900" class="embed-responsive" src="~/AfpBData/@BookPath" controls>
+            </iframe>
+        </div>
+    </div>
+</div>
+
+<div class="display-book-section">
+    <a href="/ebooks">
+        <h4>Return</h4>
+    </a>
+</div>
+
+<!-- Swiper Container for handling Recommended Books -->
+<div class="swiper-container swiper-container-book">
+    <h4>Recommended Books</h4>
+    <p>Books you might be interested in</p>
+    <div class="swiper-wrapper">
+        @foreach (var item in Model.Recommended)
+        {
+            <div class="swiper-slide swiper-slide-book">
+                <div class="imgBox">
+                    <a href="/ebooks/read/@item.BookId">
+                        <img src="~/AfpBData/@item.ImagePath" />
+                    </a>
+                </div>
+                <div class="details" id="filmName">
+                    <a href="/ebooks/read/@item.BookId">
+                        <h3>
+                            @item.BookTitle
+                        </h3>
+                    </a>
+                </div>
+                <div class="watch-container">
+                    <div class="button-group">
+                        <span>
+                            PDF
+                        </span>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+
+<script>
+    var swiper = new Swiper('.swiper-container-book', {
+        effect: 'coverflow',
+        grabCursor: true,
+        spaceBetween: 40,
+        slidesPerView: 'auto',
+
+        breakpoints: {
+            320: {
+                slidesPerView: 2
+            },
+            480: {
+                slidesPerView: 2
+            },
+            640: {
+                slidesPerView: 2
+            },
+            768: {
+                slidesPerView: 3,
+                slidesPerGroup: 3
+            },
+            850: {
+                slidesPerView: 4,
+                slidesPerGroup: 4
+            },
+            1024: {
+                slidesPerView: 5,
+                slidesPerGroup: 5
+            }
+        },
+
+        coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 0,
+            modifier: 1,
+            slideShadows: false,
+        },
+
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+
+        pagination: {
+            el: '.page-book-zero',
+            clickable: true,
+        }
+    });
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

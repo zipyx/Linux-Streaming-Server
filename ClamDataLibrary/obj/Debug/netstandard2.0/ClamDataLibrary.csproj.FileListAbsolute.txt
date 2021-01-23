@@ -1,0 +1,9 @@
+C:\Users\Gorilla Rig\source\repos\Clam\ClamDataLibrary\bin\Debug\netstandard2.0\ClamDataLibrary.deps.json
+C:\Users\Gorilla Rig\source\repos\Clam\ClamDataLibrary\bin\Debug\netstandard2.0\ClamDataLibrary.dll
+C:\Users\Gorilla Rig\source\repos\Clam\ClamDataLibrary\bin\Debug\netstandard2.0\ClamDataLibrary.pdb
+C:\Users\Gorilla Rig\source\repos\Clam\ClamDataLibrary\obj\Debug\netstandard2.0\ClamDataLibrary.csproj.CoreCompileInputs.cache
+C:\Users\Gorilla Rig\source\repos\Clam\ClamDataLibrary\obj\Debug\netstandard2.0\ClamDataLibrary.AssemblyInfoInputs.cache
+C:\Users\Gorilla Rig\source\repos\Clam\ClamDataLibrary\obj\Debug\netstandard2.0\ClamDataLibrary.AssemblyInfo.cs
+C:\Users\Gorilla Rig\source\repos\Clam\ClamDataLibrary\obj\Debug\netstandard2.0\ClamDataLibrary.dll
+C:\Users\Gorilla Rig\source\repos\Clam\ClamDataLibrary\obj\Debug\netstandard2.0\ClamDataLibrary.pdb
+C:\Users\Gorilla Rig\source\repos\Clam\ClamDataLibrary\obj\Debug\netstandard2.0\ClamDataLibrary.csprojAssemblyReference.cache

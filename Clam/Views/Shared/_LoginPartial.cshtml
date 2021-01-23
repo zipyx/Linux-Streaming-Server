@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ClamDataLibrary.Models
+
+@inject SignInManager<ClamUserAccountRegister> SignInManager
+@inject UserManager<ClamUserAccountRegister> UserManager
+
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item dropdown">
+            <a class="nav-link text-light dropdown-toggle" data-toggle="dropdown" href="#">Hello @UserManager.GetUserName(User)</a>
+            <ul class="dropdown-menu dropdown-menu-right">
+                <li class="nav-item dropdown">
+                    <a id="manage" class="dropdown-item nav-link text-light custom-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Profile Settings</a>
+                </li>
+                @if ((User.IsInRole("Owner")) && (User.Identity.IsAuthenticated))
+                {
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-item nav-link text-light custom-link" asp-area="Projects" asp-controller="Projects" asp-action="Index">Projects</a>
+                    </li>
+                }
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <li class="nav-item dropdown">
+                        <a class="dropdown-item nav-link text-light custom-link" asp-area="Storage" asp-controller="Storage" asp-action="Index">Storage Drive</a>
+                    </li>
+                    @if ((User.IsInRole("Admin")) || (User.IsInRole("Engineer")) || (User.IsInRole("Developer")))
+                    {
+                        <li class="dropdown-submenu">
+                            <a class="dropdown-toggle nav-link text-light" href="#" data-toggle="dropdown">Contributions</a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-item nav-link text-light custom-link" asp-area="Academia" asp-controller="Academia" asp-action="Category">Academia</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-item nav-link text-light custom-link" asp-area="EBooks" asp-controller="EBooks" asp-action="Index">Books</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-item nav-link text-light custom-link" asp-area="Clamflix" asp-controller="Film" asp-action="Index">Movies</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-item nav-link text-light custom-link" asp-area="Music" asp-controller="Music" asp-action="Index">Music</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-item nav-link text-light custom-link" asp-area="TVShows" asp-controller="TVShow" asp-action="Genre">TV Shows</a>
+                                </li>
+                            </ul>
+                        </li>
+                    }
+                    <li class="dropdown-submenu">
+                        <a class="dropdown-toggle nav-link text-light" href="#" data-toggle="dropdown">Tickets</a>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                            <li class="nav-item dropdown">
+                                <a class="dropdown-item nav-link text-light custom-link" asp-area="Tickets" asp-controller="Ticket" asp-action="Index">Log Ticket</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </li>
+        <li class="nav-item">
+            <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button id="logout" type="submit" class="nav-link btn btn-link text-light">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+
+        @*<li class="nav-item">
+                <a class="nav-link text-light" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+            </li>*@
+        <li class="nav-item">
+            <a class="nav-link text-light" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

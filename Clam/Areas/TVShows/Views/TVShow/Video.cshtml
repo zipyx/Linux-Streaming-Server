@@ -1,0 +1,48 @@
+﻿@model Clam.Areas.TVShows.Models.SectionTVShowSubCategorySeasonItem
+
+@{
+    ViewData["Title"] = "Video";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Title = ViewBag.Title;
+    var Gid = ViewBag.Gid;
+    var Sid = ViewBag.Sid;
+    var Sig = ViewBag.Sig;
+    var Vid = ViewBag.Data;
+    var Path = ViewBag.Path;
+
+    var Video = ViewBag.Video;
+    var SeasonName = ViewBag.SeasonName;
+    var ShowName = ViewBag.ShowName;
+    var GenreName = ViewBag.GenreName;
+
+    var UrlGenre = ViewBag.UrlGenre;
+    var UrlSection = ViewBag.UrlSection;
+    var UrlSubsection = ViewBag.UrlSubsection;
+    var UrlSubsectionItem = ViewBag.UrlSubsectionItem;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/tvshows/manage" asp-action="Genre" asp-controller="TVShow">Genres</a></li>
+        <li class="breadcrumb-item"><a href="/tvshows/manage/@UrlGenre/list/@Gid">@GenreName Shows</a></li>
+        <li class="breadcrumb-item"><a href="/tvshows/manage/@UrlGenre/@UrlSection/seasons/@Gid/@Sid">@ShowName </a></li>
+        <li class="breadcrumb-item"><a href="/tvshows/manage/@UrlGenre/@UrlSection/season/@UrlSubsection/episodes/@Gid">Season @SeasonName Episodes</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Video</li>
+    </ol>
+</nav>
+<h1>@Video</h1>
+
+<br />
+<hr />
+<div class="video-frame table-responsive-sm">
+    <video id="videoplayer" width="1110" height="600" class="embed-responsive" src="~/AfpSData/@Path" controls>
+    </video>
+</div>
+
+<br />
+<div>
+    @Html.ActionLink("Episodes", "Episode", "TVShow", new { id = Gid, show = Sid, season = Sig, category = UrlGenre, section = UrlSection, subsection = UrlSubsection }, new { @class = "btn btn-primary rounded" })
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

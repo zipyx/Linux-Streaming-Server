@@ -1,0 +1,129 @@
+﻿@model Clam.Models.UserAccountInformation
+@{ var UserId = ViewBag.UserId;}
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Update Account Information</h1>
+
+<br />
+<hr />
+<div class="row">
+    <div class="col-lg">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <label asp-for="FirstName" class="col-md-4 col-form-label form-control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="LastName" class="col-md-4 col-form-label form-control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Gender" class="col-md-4 col-form-label form-control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="Gender" class="form-control" />
+                    <span asp-validation-for="Gender" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Birthday" class="col-md-4 col-form-label form-control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="Birthday" class="form-control" />
+                    <span asp-validation-for="Birthday" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="UserName" class="col-md-4 col-form-label form-control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="UserName" class="form-control" />
+                    <span asp-validation-for="UserName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="Email" class="col-md-4 col-form-label form-control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label asp-for="PhoneNumber" class="col-md-4 col-form-label form-control-label"></label>
+                <div class="col-md-8">
+                    <input asp-for="PhoneNumber" class="form-control" />
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Delete", "Delete", new { Id = UserId }, new { @class = "btn btn-danger" })
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card">
+    <h5 class="card-header">Role Management</h5>
+    <div class="card-body">
+        <h5 class="card-title">Current User Roles</h5>
+        <table>
+            <thead>
+                <tr>
+                    <th>User Roles:</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Roles)
+                {
+                    <tr>
+                        <td>@item</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-muted">
+        @Html.ActionLink("Manage Roles", "ManageUserRoles", new { Id = UserId}, new { @class = "btn btn-primary"})
+    </div>
+</div>
+
+<div class="card">
+    <h5 class="card-header">Claims Management</h5>
+    <div class="card-body">
+        <h5 class="card-title">Current User Claims</h5>
+        <table>
+            <thead>
+                <tr>
+                    <th>User Claims:</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Claims)
+                {
+                    <tr>
+                        <td>@item</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer text-muted">
+        @Html.ActionLink("Manage Claims", "ManageUserClaims", new { Id = UserId }, new { @class = "btn btn-primary" })
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

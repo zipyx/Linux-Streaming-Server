@@ -1,0 +1,109 @@
+﻿@model Clam.Areas.TVShows.Models.SectionTVShowSubCategory
+
+@{
+    ViewData["Title"] = "DeleteTVShow";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Genre = ViewBag.Genre;
+    var Name = ViewBag.Name;
+    var Gid = ViewBag.Gid;
+    var TVShowId = ViewBag.TVShowId;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/tvshows/manage/@Genre/list/@Gid">@Genre shows</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Remove @Name Show </li>
+    </ol>
+</nav>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TVShowId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TVShowId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TVShowTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TVShowTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemPath)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ItemPath)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TVShowSeasonNumberTotal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TVShowSeasonNumberTotal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastModified)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastModified)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubCategorySeasonCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubCategorySeasonCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubCategorySeasonItemCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubCategorySeasonItemCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CategoryId)
+        </dd>
+    </dl>
+    @using (Html.BeginForm(actionName: "DeleteTVShow", controllerName: "TVShow", method: FormMethod.Post, new { enctype = "multipart/form-data", id = TVShowId }))
+    {
+        <div class="form-group row">
+            @Html.LabelFor(model => model.CategoryId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.CategoryId, null, new { @class = "form-control", @hidden = "hidden" })
+                @Html.ValidationMessageFor(model => model.CategoryId, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.TVShowId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.TVShowId, null, new { @class = "form-control", @hidden = "hidden" })
+                @Html.ValidationMessageFor(model => model.TVShowId, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.ItemPath, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.ItemPath, null, new { @class = "form-control", @hidden = "hidden" })
+                @Html.ValidationMessageFor(model => model.ItemPath, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.TVShowTitle, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.TVShowTitle, null, new { @class = "form-control", @hidden = "hidden" })
+                @Html.ValidationMessageFor(model => model.TVShowTitle, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Remove" class="btn btn-danger" />
+        </div>
+    }
+</div>

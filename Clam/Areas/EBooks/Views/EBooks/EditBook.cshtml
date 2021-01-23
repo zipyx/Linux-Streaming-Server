@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using ClamDataLibrary.Models
+@model Clam.Areas.EBooks.Models.StreamFormDataBooks
+@{
+    ViewData["Title"] = "EditBook";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var BookId = ViewBag.BookId;
+}
+@inject SignInManager<ClamUserAccountRegister> SignInManager
+@inject UserManager<ClamUserAccountRegister> UserManager
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/ebooks/manage">Books</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit Book</li>
+    </ol>
+</nav>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        @using (Html.BeginForm(actionName: "EditBook", controllerName: "EBooks", method: FormMethod.Post, new { id = BookId }))
+        {
+            @Html.ValidationSummary(message: "Ensure Field is filled in by specific requirements.", htmlAttributes: new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.BookTitle, null, new { @class = "col-md-4 col-form-label control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.BookTitle, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.BookTitle, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Status, null, new { @class = "col-md-4 col-form-label control-label" })
+                <div class="col-md-8">
+                    @Html.DropDownListFor(model => model.Status, new SelectList(ViewBag.ViewStatus, "Value", "Text"), new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>

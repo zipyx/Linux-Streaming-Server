@@ -1,0 +1,60 @@
+﻿@model Clam.Areas.Academia.Models.SectionRegister
+
+@{
+    ViewData["Title"] = "SectionDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var UrlCategory = ViewBag.UrlCategory;
+    var UrlSection = ViewBag.UrlSection;
+    var SectionName = ViewBag.SectionName;
+    var CategoryName = ViewBag.CategoryName;
+    var Name = ViewBag.Name;
+    var Aid = ViewBag.Aid;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/academia/manage">Academic Categories</a></li>
+        <li class="breadcrumb-item"><a href="/academia/manage/@UrlCategory/list/@Aid">@CategoryName</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@SectionName Details</li>
+    </ol>
+</nav>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubCategoryId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubCategoryId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubCategoryTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubCategoryTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubCategoryDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubCategoryDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastModified)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastModified)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateAdded)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AcademicId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AcademicId)
+        </dd>
+    </dl>
+</div>

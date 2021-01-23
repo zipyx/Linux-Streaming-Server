@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Clam.Areas.TVShows.Models.SectionTVShowSubCategorySeason>
+
+@{
+    ViewData["Title"] = "TVShowSeasons";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Name = ViewBag.Name;
+    var Genre = ViewBag.Genre;
+    var Gid = ViewBag.Gid;
+    var Show = ViewBag.Show;
+
+    var UrlGenre = ViewBag.UrlCategory;
+    var UrlSection = ViewBag.UrlSection;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/tvshows/manage">Genres</a></li>
+        <li class="breadcrumb-item"><a href="/tvshows/manage/@UrlGenre/list/@Gid">@Genre shows</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Name</li>
+    </ol>
+</nav>
+<div>
+    @Html.ActionLink("Add Season", "AddTVShowSeason", "TVShow", new { id = Gid, show = Show, Category = UrlGenre, Section = UrlSection }, new { @class = "btn btn-success rounded" })
+</div>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <br />
+            <div class="row no-gutters bg-light position-relative">
+                <div class="col-md-6 mb-md-0 p-md-4">
+                    <img src="~/AfpIData/@item.ItemPath" class="w-100" alt="...">
+                </div>
+                <div class="col-md-6 position-static p-4 pl-md-0">
+                    <h3 class="mt-0">Season @item.TVShowSeasonNumber</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <b>@Html.DisplayNameFor(model => model.SubCategorySeasonItemCount) :</b> @Html.DisplayFor(modelItem => item.SubCategorySeasonItemCount)<br />
+                        </li>
+                    </ul>
+                    @Html.ActionLink("Select", "Episode", new { id = item.CategoryId, show = item.TVShowId, season = item.SeasonId, category = item.UrlCategory, section = item.UrlSection, subsection = item.UrlSubSection }, new { @class = "btn btn-primary stretched-link mt-auto" })
+                </div>
+            </div>
+            <div class="card-footer">
+                <button type="button" class="btn btn-primary float-right rounded" data-toggle="collapse" data-target="#season-@item.TVShowSeasonNumber.ToString().Replace(" ",  "")">Options</button>
+                <div id="season-@item.TVShowSeasonNumber.ToString().Replace(" ",  "")" class="collapse">
+                    @Html.ActionLink("Delete", "DeleteTVShowSeason", new { id = item.CategoryId, show = item.TVShowId, season = item.SeasonId, category = item.UrlCategory, section = item.UrlSection, subsection = item.UrlSubSection }, new { @class = "btn btn-secondary float-right rounded" })
+                    @Html.ActionLink("Edit", "EditTVShowSeason", new { id = item.CategoryId, show = item.TVShowId, season = item.SeasonId, category = item.UrlCategory, section = item.UrlSection, subsection = item.UrlSubSection }, new { @class = "btn btn-secondary float-right rounded" })
+                </div>
+                <footer class="blockquote-footer float-left">Last Modified: <cite>@item.LastModified</cite></footer>
+                <br />
+                <footer class="blockquote-footer">Added: <cite>@item.DateCreated</cite></footer>
+            </div><br />
+        </td>
+    </tr>
+}

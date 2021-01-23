@@ -1,0 +1,124 @@
+﻿@model Clam.Areas.EBooks.Models.BooksHome
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/books/books.css" />
+}
+<a href="/ebooks">
+    <h1 style="color:#e50914;">EBooks</h1>
+</a>
+
+<!-- Search Bar -->
+<div class="container">
+    <div class="display-tv-section">
+        <br />
+        <h2 style="color:whitesmoke">Search</h2>
+        @using (Html.BeginForm("Index", "Home", FormMethod.Get))
+        {
+            @Html.TextBox("search", null, null, new { @class = "form-control", @placeholder = "Book name, genre", @id = "myMovie" }) <br />
+            <input type="submit" value="Search" id="myMovie" class="btn btn-success" />
+        }
+    </div>
+</div>
+<br />
+
+<div id="page-content">
+    @*@Html.Partial("_IndexPartial")*@
+    @await Html.PartialAsync("_IndexPartial")
+</div>
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container-book', {
+        effect: 'coverflow',
+        grabCursor: true,
+        spaceBetween: 40,
+        slidesPerView: 'auto',
+
+        breakpoints: {
+            320: {
+                slidesPerView: 2
+            },
+            480: {
+                slidesPerView: 2
+            },
+            640: {
+                slidesPerView: 2
+            },
+            768: {
+                slidesPerView: 3,
+                slidesPerGroup: 3
+            },
+            850: {
+                slidesPerView: 4,
+                slidesPerGroup: 4
+            },
+            1024: {
+                slidesPerView: 5,
+                slidesPerGroup: 5
+            }
+        },
+
+        coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 0,
+            modifier: 1,
+            slideShadows: false,
+        },
+
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+
+        pagination: {
+            el: '.page-book-zero',
+            clickable: true,
+        }
+    });
+
+    var swiper = new Swiper('.swiper-container-book-genre', {
+        spaceBetween: 5,
+        slidesPerView: 3,
+        breakpoints: {
+            320: {
+                slidesPerView: 2
+            },
+            480: {
+                slidesPerView: 2
+            },
+            640: {
+                slidesPerView: 2
+            },
+            640: {
+                slidesPerView: 3,
+                spacebetween: 5
+            },
+            768: {
+                slidesPerView: 3,
+                spacebetween: 5
+            },
+            850: {
+                slidesPerView: 4,
+                slidesPerGroup: 4
+            },
+            1024: {
+                slidesPerView: 5,
+                spacebetween: 5
+            }
+        },
+        pagination: {
+            el: '.page-book-one',
+            clickable: true,
+        },
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+
+</script>

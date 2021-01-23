@@ -1,0 +1,96 @@
+﻿@model Clam.Areas.TVShows.Models.StreamTVShowFileUploadDatabase
+
+@{
+    ViewData["Title"] = "Episode";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var SeasonName = ViewBag.SeasonName;
+    var ShowName = ViewBag.ShowName;
+    var GenreName = ViewBag.GenreName;
+
+    var Gid = ViewBag.Gid;
+    var TVShowId = ViewBag.Sid;
+    var SeasonId = ViewBag.Sig;
+
+
+    var UrlGenre = ViewBag.UrlGenre;
+    var UrlSection = ViewBag.UrlSection;
+    var UrlSubsection = ViewBag.UrlSubsection;
+
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/tvshows/manage" asp-action="Genre" asp-controller="TVShow">Genres</a></li>
+        <li class="breadcrumb-item"><a href="/tvshows/manage/@UrlGenre/list/@Gid">@GenreName Shows</a></li>
+        <li class="breadcrumb-item"><a href="/tvshows/manage/@UrlGenre/@UrlSection/seasons/@Gid/@TVShowId">@ShowName </a></li>
+        <li class="breadcrumb-item active" aria-current="page">Season @SeasonName Episodes</li>
+    </ol>
+</nav>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        @using (Html.BeginForm(actionName: "UploadDatabase", controllerName: "TVShow", method: FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "AJAXSubmit(this); return false;" }))
+        {
+            @Html.ValidationSummary(message: "Ensure Field is filled in by specific requirements.", htmlAttributes: new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.FormFile, null, new { @class = "col-md-4 col-form-label control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.FormFile, null, new { @class = "form-control-file border", @type = "file", @multiple = "multiple", id = "FileInput" })
+                    @Html.ValidationMessageFor(model => model.FormFile, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.CategoryId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.CategoryId, null, new { @class = "form-control", @hidden = "hidden" })
+                    @Html.ValidationMessageFor(model => model.CategoryId, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.TVShowId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.TVShowId, null, new { @class = "form-control", @hidden = "hidden" })
+                    @Html.ValidationMessageFor(model => model.TVShowId, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.SeasonId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.SeasonId, null, new { @class = "form-control", @hidden = "hidden" })
+                    @Html.ValidationMessageFor(model => model.SeasonId, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.UrlCategory, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.UrlCategory, null, new { @class = "form-control", @hidden = "hidden" })
+                    @Html.ValidationMessageFor(model => model.UrlCategory, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.UrlSection, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.UrlSection, null, new { @class = "form-control", @hidden = "hidden" })
+                    @Html.ValidationMessageFor(model => model.UrlSection, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.UrlSubSection, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.UrlSubSection, null, new { @class = "form-control", @hidden = "hidden" })
+                    @Html.ValidationMessageFor(model => model.UrlSubSection, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Upload" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+@*@Html.Partial("EpisodeList")*@
+@await Html.PartialAsync("EpisodeList")
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

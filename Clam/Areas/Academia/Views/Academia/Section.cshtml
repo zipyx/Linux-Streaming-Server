@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Clam.Areas.Academia.Models.SectionRegister>
+@{ var Aid = ViewBag.Aid;}
+@{ var Name = ViewBag.Category;}
+@{
+    ViewData["Title"] = "Section";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var UrlCategory = ViewBag.UrlCategory;
+    var CategoryName = ViewBag.CategoryName;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/academia/manage">Academic Categories</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@CategoryName</li>
+    </ol>
+</nav>
+@if ((User.Identity.IsAuthenticated) && ((User.IsInRole("Contributor"))
+|| (User.IsInRole("Engineer")) || (User.IsInRole("Developer")) || (User.IsInRole("Admin")) || (User.IsInRole("Owner"))))
+{
+    <p>
+        @Html.ActionLink("Create Section", "CreateSection", "Academia", new { id = Aid, category = UrlCategory }, new { @class = "btn btn-success" })
+    </p>
+}
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <div class="card">
+                <div class="card-header">
+                    <div class="float-sm-left">
+                        <h3>@item.SubCategoryTitle</h3>
+                    </div>
+                    <div class="float-sm-right">
+                        <b>Total Videos:</b> @item.VideoCount
+                    </div>
+                </div>
+                <div class="card-body">
+                    <h5>Description</h5>
+                    <p class="card-text">@item.SubCategoryDescription</p>
+                </div>
+                <div class="card-footer text-muted">
+                    <footer class="blockquote-footer float-left">Last Modified: <cite>@item.LastModified</cite></footer>
+                    <br />
+                    <footer class="blockquote-footer float-left">Added: <cite>@item.DateAdded</cite></footer>
+                    @Html.ActionLink("Select", "Episode", new { id = @item.AcademicId, said = @item.SubCategoryId, category = item.UrlCategory, section = item.UrlSection }, new { @class = "btn btn-primary float-right" })
+                    @if ((User.Identity.IsAuthenticated) && ((User.IsInRole("Contributor")) 
+                        || (User.IsInRole("Engineer")) || (User.IsInRole("Developer")) || (User.IsInRole("Admin")) || (User.IsInRole("Owner"))))
+                    {
+                        <button type="button" data-toggle="collapse" data-target="#@item.SubCategoryTitle.Replace(" ", "")" class="btn btn-primary float-right">Options</button>
+                        <div id="@item.SubCategoryTitle.Replace(" ",  "")" class="collapse">
+                            @Html.ActionLink("Details", "SectionDetails", new { id = @item.SubCategoryId, category = item.UrlCategory, section = item.UrlSection }, new { @class = "btn btn-primary float-right" })
+                            @Html.ActionLink("Edit", "EditSection", new { id = @item.SubCategoryId, category = item.UrlCategory, section = item.UrlSection }, new { @class = "btn btn-primary float-right" })
+                            @Html.ActionLink("Delete", "DeleteSection", new { id = @item.SubCategoryId, category = item.UrlCategory, section = item.UrlSection }, new { @class = "btn btn-danger float-right" })
+                        </div>
+                    }
+                </div>
+            </div>
+            <br />
+        </td>
+    </tr>
+}

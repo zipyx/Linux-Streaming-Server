@@ -1,0 +1,79 @@
+﻿@model Clam.Areas.Tickets.Models.AreaUserTicket
+@{
+    ViewData["Title"] = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/tickets">Tickets</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Html.DisplayFor(model => model.TicketTitle)</li>
+    </ol>
+</nav>
+@using (Html.BeginForm(actionName: "UpdateTicket", controllerName: "Ticket", method: FormMethod.Post))
+{
+    @Html.ValidationSummary(message: "Please be accurate, simple and to the point.", htmlAttributes: new { @class = "text-danger" })
+    <div class="form-group row">
+        @Html.LabelFor(model => model.TicketStatus, null, new { @class = "col-md-4 col-form-label control-label" })
+        <div class="col-md-8">
+            @Html.DropDownListFor(model => model.TicketStatus, new SelectList(ViewBag.TicketStatus, "Value", "Text"), new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TicketStatus, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.TicketResponse, null, new { @class = "col-md-4 col-form-label control-label" })
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model.TicketResponse, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TicketResponse, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group row">
+        @Html.LabelFor(model => model.SystemTicketId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+        <div class="col-md-8">
+            @Html.TextBoxFor(model => model.SystemTicketId, new { @class = "form-control", @hidden = "hidden"})
+            @Html.ValidationMessageFor(model => model.SystemTicketId, null, new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Update" class="btn btn-primary" />
+    </div>
+}
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SystemTicketId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SystemTicketId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TicketStatus)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TicketStatus)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DesignatedMember)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DesignatedMember)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TicketTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TicketTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TicketMessage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TicketMessage)
+        </dd>
+    </dl>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

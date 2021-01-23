@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Clam.Areas.EBooks.Models.BooksGenreSelection>
+@{
+    ViewData["Title"] = "GenreDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var CategoryName = ViewBag.CategoryName;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/ebooks/manage">Books</a></li>
+        <li class="breadcrumb-item"><a href="/ebooks/manage/genre">Genre</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@CategoryName</li>
+    </ol>
+</nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.IsSelected)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookId)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.IsSelected)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookId)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

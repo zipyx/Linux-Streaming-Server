@@ -1,0 +1,144 @@
+﻿@model Clam.Areas.Projects.Models.ProjectHome
+@{
+    ViewData["Title"] = "Home Page";
+}
+<div class="full-width">
+    <div class="jumbotron jumbotron-fluid bg-dark">
+
+        <div class="jumbotron-background">
+            <img src="~/brand/space.jpg" class="blur ">
+        </div>
+        <div class="container text-white">
+
+            <h1 class="display-4">Setephano Noovao</h1>
+            <p class="lead">Passionate and always looking for opportunities to learn!</p>
+            <hr class="my-4">
+            <p>Until you make the unconscious conscious, it will direct your life and you will call it fate</p>
+            <footer class="blockquote-footer font-weight-bold">Carl Gustav Jung</footer>
+
+        </div>
+        <!-- /.container -->
+    </div>
+</div>
+
+<br />
+<div class="text-center section-display">
+    <h1 class="display-4 divider">My Experience</h1>
+    <p>Personal projects I've worked on</p>
+</div>
+<br />
+<br />
+
+@foreach (var item in Model.AreaUserProjects)
+{
+    <div class="card mb-2 border-0" style="max-width: 1110px;">
+        <div class="row no-gutters">
+            <div class="col-md-4 project-image-container">
+                <img src="~/AfpPData/@item.ImageGifLocation" preserveAspectRatio="xMidYMid slice" role="img" class="img-fluid project-images-display" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body project-section-details">
+                    <h5 class="card-title">@item.Title</h5>
+                    <h6 class="card-title">@item.Language</h6>
+                    <p class="card-text">Github: @Html.DisplayFor(model => item.GithubLink)</p>
+                    <p class="card-text">@item.Description</p>
+                    <p class="card-text"><small class="text-muted">Last updated : @item.LastModified</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+}
+
+
+<div class="text-center section-display">
+    <h1 class="display-4 divider">My Interests</h1>
+    <p>I enjoy contemplating and reading on ideas from philosophy, science and history</p>
+</div>
+<br />
+
+<div class="swiper-container swiper-container-project">
+    <div class="swiper-wrapper">
+        @foreach (var item in Model.AreaUserProjectsImageInterests)
+        {
+            <div class="swiper-slide swiper-slide-project">
+                <div class="imgBox">
+                    <img src="~/AfpPData/@item.ImageLocation" />
+                </div>
+                <div class="details">
+                    <h3>@item.Title</h3>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<br />
+<br />
+
+<div class="text-center section-display">
+    <h1 class="display-4 divider">Let's Connect</h1>
+    <p>One of the best ways to contact me is through any of the following</p>
+    <div class="row">
+        <div class="column">
+            <a href="https://www.instagram.com/zipyxx/"><img src="~/social-media/instagram.png" /></a>
+            <a href="https://www.quora.com/profile/Setephano-Noovao"><img src="~/social-media/quora.png" /></a>
+            <a href="https://www.facebook.com/setephano.noovao"><img src="~/social-media/messenger.png" /></a>
+            <a href="https://www.reddit.com/user/Flow_Tide/"><img src="~/social-media/reddit.png" /></a>
+            <a href="https://twitter.com/SetephanoNoovao"><img src="~/social-media/twitter.png" /></a>
+        </div>
+    </div>
+</div>
+<br />
+
+<!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper('.swiper-container-project', {
+        effect: 'coverflow',
+        grabCursor: true,
+        spaceBetween: 40,
+        slidesPerView: 'auto',
+
+        breakpoints: {
+            320: {
+                slidesPerView: 2
+            },
+            480: {
+                slidesPerView: 2
+            },
+            640: {
+                slidesPerView: 2
+            },
+            768: {
+                slidesPerView: 3,
+                slidesPerGroup: 3
+            },
+            850: {
+                slidesPerView: 4,
+                slidesPerGroup: 4
+            },
+            1024: {
+                slidesPerView: 5,
+                slidesPerGroup: 5
+            }
+        },
+
+        coverflowEffect: {
+            rotate: 0,
+            stretch: 0,
+            depth: 0,
+            modifier: 1,
+            slideShadows: false,
+        },
+
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev'
+        },
+
+        pagination: {
+            el: '.page-project',
+            clickable: true,
+        }
+    });
+</script>

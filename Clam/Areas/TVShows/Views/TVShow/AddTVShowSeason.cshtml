@@ -1,0 +1,58 @@
+﻿@model Clam.Areas.TVShows.Models.SectionTVShowSubCategorySeason
+
+@{
+    ViewData["Title"] = "AddTVShowSeason";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Gid = ViewBag.Gid;
+    var Genre = ViewBag.Genre;
+    var Show = ViewBag.TVShow;
+    var TVShowId = ViewBag.TVShowId;
+
+    var GenreUrl = ViewBag.GenreUrl;
+    var ShowUrl = ViewBag.ShowUrl;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="/tvshows/manage/@GenreUrl/@ShowUrl/seasons/@Gid/@TVShowId">@Show Seasons</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Add @Show Season</li>
+    </ol>
+</nav>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        @using (Html.BeginForm(actionName: "AddTVShowSeason", controllerName: "TVShow", method: FormMethod.Post, new { enctype = "multipart/form-data", id = Gid, category = Genre }))
+        {
+            @Html.ValidationSummary(message: "Ensure Field is filled in by specific requirements.", htmlAttributes: new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.TVShowSeasonNumber, null, new { @class = "col-md-4 col-form-label control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.TVShowSeasonNumber, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TVShowSeasonNumber, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.TVShowId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.TVShowId, null, new { @class = "form-control", @hidden = "hidden" })
+                    @Html.ValidationMessageFor(model => model.TVShowId, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.CategoryId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.CategoryId, null, new { @class = "form-control", @hidden = "hidden" })
+                    @Html.ValidationMessageFor(model => model.CategoryId, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

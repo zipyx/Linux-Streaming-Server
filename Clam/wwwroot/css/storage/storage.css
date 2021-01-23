@@ -1,0 +1,68 @@
+﻿body {
+    background: #282828;
+    color: #000;
+}
+
+.storage-class {
+    color: whitesmoke;
+}
+
+.storage-class th {
+    color: darkorange;
+}
+
+.table-storage-color {
+    color: whitesmoke;
+}
+
+.table-storage-color:hover {
+    color:darkorange;
+}
+
+    .table-storage-color h4 {
+        color: whitesmoke;
+    }
+
+        .table-storage-color h4:hover {
+            color: #e50914;
+        }
+
+/* Test Images */
+.object-fit_fill {
+    object-fit: fill;
+}
+
+.object-fit_contain {
+    object-fit: contain;
+}
+
+.object-fit_cover {
+    object-fit: cover;
+}
+
+.object-fit_none {
+    object-fit: none;
+}
+
+.object-fit_scale-down {
+    object-fit: scale-down;
+}
+
+.display-carousel {
+}
+
+    .display-carousel img {
+        height: 420px;
+        background-color: #fff;
+    }
+
+img[class] {
+    width: 100%;
+    height: 600px;
+}
+
+.image {
+    float: left;
+    width: 40%;
+    margin: 0 30px 20px 0;
+}

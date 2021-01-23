@@ -1,0 +1,107 @@
+﻿@model Clam.Models.UserAccountInformation
+@{var UserId = ViewBag.UserId;}
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Account Details</h1>
+
+<div>
+    <br />
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Gender)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Gender)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Birthday)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Birthday)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Roles)
+        </dt>
+        <dd class="col-sm-10">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User Roles:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Roles)
+                    {
+                        <tr>
+                            <td>@item</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Claims)
+        </dt>
+        <dd class="col-sm-10">
+            <table>
+                <thead>
+                    <tr>
+                        <th>User Claims:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Claims.ToList())
+                    {
+                        <tr>
+                            <td>@item</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = UserId }) |
+    <a asp-action="Index">Back to List</a>
+</div>

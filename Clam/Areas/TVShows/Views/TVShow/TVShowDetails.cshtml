@@ -1,0 +1,75 @@
+﻿@model Clam.Areas.TVShows.Models.SectionTVShowSubCategory
+
+@{
+    ViewData["Title"] = "TVShowDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Name = ViewBag.Name;
+    var Gid = ViewBag.Gid;
+    var UrlGenre = ViewBag.UrlGenre;
+    var Genre = ViewBag.Genre;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/tvshows/manage/@UrlGenre/list/@Gid" >@Genre shows</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@Name Show Details</li>
+    </ol>
+</nav>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TVShowId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TVShowId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TVShowTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TVShowTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ItemPath)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ItemPath)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TVShowSeasonNumberTotal)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TVShowSeasonNumberTotal)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastModified)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastModified)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateCreated)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateCreated)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubCategorySeasonCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubCategorySeasonCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubCategorySeasonItemCount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubCategorySeasonItemCount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CategoryId)
+        </dd>
+    </dl>
+</div>

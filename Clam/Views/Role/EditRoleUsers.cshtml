@@ -1,0 +1,82 @@
+﻿@model List<Clam.Models.RoleAccountUsers>
+
+@{ var roleId = ViewBag.roleId;}
+
+@{
+    ViewData["Title"] = "EditRoleUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Role Identification Management</h1>
+
+@using (Html.BeginForm("EditRoleUsers", "Role", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger"})
+
+    <div class="card">
+        <div class="card-header">
+            <h3>Add or Remove Users to this Role</h3>
+            <p>Role Identification: @roleId</p>
+        </div>
+        <div class="card-body">
+            @Html.HiddenFor(m => roleId, new { @class = "form-control" })
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Select
+                        </th>
+                        <th>
+                            Code
+                        </th>
+                        <th>
+                            Username
+                        </th>
+                        <th>
+                            First Name
+                        </th>
+                        <th>
+                            Last Name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.CheckBoxFor(modelItem => Model[i].IsSelected, new { @id = "checked" })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model[i].Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model[i].UserName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model[i].FirstName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model[i].LastName)
+                            </td>
+                            <td>
+                                @Html.HiddenFor(modelItem => Model[i].Id, new { @class = "form-control"})
+                                @Html.HiddenFor(m => roleId, new { @class = "form-control"})
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            @Html.ActionLink("Back to Profile", "Edit", new { id = roleId}, new { @class = "btn btn-warning" })
+            <input type="submit" value="Update" class="btn btn-primary" style="width:auto" />
+        </div>
+    </div>
+}
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index", new { @class = "btn btn-secondary"})
+</div>

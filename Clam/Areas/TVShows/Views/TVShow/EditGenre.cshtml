@@ -1,0 +1,43 @@
+﻿@model Clam.Areas.TVShows.Models.SectionTVShowCategory
+@{ var Name = ViewBag.Name;}
+@{
+    ViewData["Title"] = "EditGenre";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var Gid = ViewBag.Gid;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/tvshows/manage">Genres</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Edit @Name Genre</li>
+    </ol>
+</nav>
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        @using (Html.BeginForm(actionName: "EditGenre", controllerName: "TVShow", method: FormMethod.Post, new { enctype = "multipart/form-data", id = Gid, category = Name }))
+        {
+            @Html.ValidationSummary(message: "Ensure Field is filled in by specific requirements.", htmlAttributes: new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.Genre, null, new { @class = "col-md-4 col-form-label control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.Genre, null, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Genre, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group row">
+                @Html.LabelFor(model => model.FormFile, null, new { @class = "col-md-4 col-form-label control-label" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.FormFile, null, new { @class = "form-control-file border", @type = "file" })
+                    @Html.ValidationMessageFor(model => model.FormFile, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

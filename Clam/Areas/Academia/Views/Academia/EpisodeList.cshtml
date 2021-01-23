@@ -1,0 +1,75 @@
+﻿@model Clam.Areas.Academia.Models.StreamFileUploadDatabase
+@{ var Said = ViewBag.Said;}
+@{ var Aid = ViewBag.Aid;}
+<div class="table-responsive-sm" id="auto-load">
+    <table class="table">
+        <caption>Stream Content</caption>
+        <thead>
+            <tr>
+                <th class="text-center">
+                    <code>Delete</code>
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.SectionItems[0].ItemTitle)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.SectionItems[0].Size)
+                </th>
+                <th class="text-center">
+                    Video Stream
+                </th>
+                <th class="text-center">
+                    <code>FileStream</code>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.SectionItems)
+            {
+                <tr>
+                    <td class="text-center">
+                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-@item.ItemId">
+                            Delete
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal-@item.ItemId" tabindex="-1" role="dialog" aria-labelledby="notify-@item.ItemId" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="notify-@item.ItemId">@item.ItemTitle</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure you want to delete this?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        @using (Html.BeginForm(actionName: "DeleteFile", controllerName: "Academia", new { id = item.ItemId, said = Said, Category = item.UrlCategory, Section = item.UrlSection }, method: FormMethod.Post))
+                                        {
+                                            <button type="submit" class="btn btn-danger" onsubmit="refreshPage();">Confirm Delete</button>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.ItemTitle)
+                    </td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Watch", "Video", "Academia", new { id = Aid, said = Said, data = item.ItemId, Category = item.UrlCategory, Section = item.UrlSection, SectionItem = item.UrlSectionItem }, new { @class = "btn btn-success" })
+                    </td>
+                    <td class="text-center">
+                        @Html.ActionLink("Download", "DownloadFile", "Academia", new { id = item.ItemId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

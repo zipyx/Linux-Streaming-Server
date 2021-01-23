@@ -1,0 +1,53 @@
+﻿@model Clam.Areas.Academia.Models.SectionItem
+@{ var Title = ViewBag.Title;}
+@{ var Aid = ViewBag.Aid;}
+@{ var Said = ViewBag.Said;}
+@{ var Path = ViewBag.Path;}
+@{ var Data = ViewBag.Data;}
+@{
+    ViewData["Title"] = "Video";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var UrlCategory = ViewBag.UrlCategory;
+    var UrlSection = ViewBag.UrlSection;
+}
+
+<h1>@Title</h1>
+<hr />
+<br />
+
+<div class="video-frame table-responsive-sm">
+    <video id="videoplayer" width="1110" height="600" class="embed-responsive" src="~/AfpAData/@Path" controls>
+    </video>
+</div>
+<br />
+
+<div>
+    @Html.ActionLink("Return", "Episode", "Academia", new { id = Aid, said = Said, Category = UrlCategory, Section = UrlSection }, new { @class = "btn btn-primary" })
+</div>
+
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+
+var disqus_config = function () {
+this.page.url = window.location.href;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = @Data; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://clam.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script id="dsq-count-scr" src="//clam.disqus.com/count.js" async></script>
+}

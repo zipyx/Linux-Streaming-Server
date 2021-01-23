@@ -1,0 +1,63 @@
+﻿@model List<Clam.Models.ClaimAccountRegister>
+@{ var UserId = ViewBag.UserId;}
+@{
+    ViewData["Title"] = "ManageUserClaims";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Claim Identification Management</h1>
+
+<br />
+<hr />
+@using (Html.BeginForm("ManageUserClaims", "Account", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary("", new { @class = "text-danger"})
+
+<div class="card">
+    <div class="card-header">
+        <h3>Add or Remove Claims to this User</h3>
+    </div>
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Select
+                    </th>
+                    <th>
+                        Claim Value
+                    </th>
+                    <th>
+                        Claim Type
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.CheckBoxFor(modelItem => Model[i].IsSelected)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Model[i].ClaimValue)
+                            @Html.HiddenFor(modelItem => Model[i].ClaimValue)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelIem => Model[i].ClaimType)
+                            @Html.HiddenFor(modelItem => Model[i].ClaimType)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        @Html.ActionLink("Back to Profile", "Edit", new { id = UserId }, new { @class = "btn btn-warning" })
+        <input type="submit" value="Update" class="btn btn-primary" style="width:auto" />
+    </div>
+</div>
+}
+

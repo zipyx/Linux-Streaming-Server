@@ -1,0 +1,42 @@
+﻿@model Clam.Areas.Storage.Models.StreamStorageFile
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/storage/storage.css" />
+}
+@section Scripts {
+    <script src="~/js/clamflix/episode-search.js"></script>
+}
+<div class="row">
+    <div class="col-md-8">
+        @using (Html.BeginForm(actionName: "MultipleFiles", controllerName: "Storage", method: FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "AJAXSubmit(this); return false;" }))
+        {
+            @Html.ValidationSummary(message: "Store your files here, all files are encrypted", htmlAttributes: new { @class = "text-danger" })
+            <div class="form-group row">
+                @Html.LabelFor(model => model.File, null, new { @class = "col-md-4 col-form-label control-label storage-class" })
+                <div class="col-md-8">
+                    @Html.TextBoxFor(model => model.File, null, new { @class = "form-control-file border storage-class", @type = "file", @multiple = "multiple" })
+                    @Html.ValidationMessageFor(model => model.File, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Upload" class="btn btn-primary" />
+            </div>
+        }
+    </div>
+    <div class="container mt-3">
+        <input class="form-control" id="myInput" type="text" placeholder="Search files...">
+    </div>
+</div>
+
+<div id="page-content" class="storage-class">
+    @*@Html.Partial("_IndexPartial")*@
+    @await Html.PartialAsync("_IndexPartial")
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

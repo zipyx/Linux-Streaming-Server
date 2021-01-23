@@ -1,0 +1,163 @@
+﻿@model Clam.Areas.EBooks.Models.BooksHome
+
+@if (Model.SearchRequest != null)
+{
+    <div class="swiper-container swiper-container-book">
+        <h2 style="text-align:left; float: left; color: whitesmoke">Searched for: </h2>
+        <h2 style="text-align:left; float: left; padding-left: 20px;">@Model.SearchRequest</h2>
+        <hr style="clear:both;" />
+        <p>Found @Model.AreaUserBooks.Count results</p>
+        @if (Model.AreaUserBooks.Count > 0)
+        {
+            <div class="swiper-wrapper">
+                @foreach (var item in Model.AreaUserBooks)
+                {
+                    <div class="swiper-slide swiper-slide-book">
+                        <div class="imgBox">
+                            <a href="/ebooks/read/@item.BookId">
+                                <img src="~/AfpBData/@item.ImagePath" />
+                            </a>
+                        </div>
+                        <div class="details" id="filmName">
+                            <a href="/ebooks/read/@item.BookId">
+                                <h3>
+                                    @item.BookTitle
+                                </h3>
+                            </a>
+                        </div>
+                        <div class="watch-container">
+                            <div class="button-group">
+                                <span>
+                                    PDF
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <!-- Add Arrows -->
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        }
+        else
+        {
+            <h5 style="color:whitesmoke">None Found</h5>
+        }
+    </div>
+}
+else
+{
+    <!-- Swiper Container for handling Recommended Books -->
+    <div class="swiper-container swiper-container-book">
+        <h2>What to read</h2>
+        <h4>Suggested Books</h4>
+        <p>Selected just for you</p>
+        <div class="swiper-wrapper">
+            @foreach (var item in Model.RecommendedList)
+            {
+                <div class="swiper-slide swiper-slide-book">
+                    <div class="imgBox">
+                        <a href="/ebooks/read/@item.BookId">
+                            <img src="~/AfpBData/@item.ImagePath" />
+                        </a>
+                    </div>
+                    <div class="details" id="filmName">
+                        <a href="/ebooks/read/@item.BookId">
+                            <h3>
+                                @item.BookTitle
+                            </h3>
+                        </a>
+                    </div>
+                    <div class="watch-container">
+                        <div class="button-group">
+                            <span>
+                                PDF
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+    <br />
+
+    <!-- Swiper Container for handling Recently Added Books -->
+    <div class="swiper-container swiper-container-book">
+        <h2>Recently Added</h2>
+        <p>Oldest to Newest</p>
+        <div class="swiper-wrapper">
+            @foreach (var item in Model.RecommendedList)
+            {
+                <div class="swiper-slide swiper-slide-book">
+                    <div class="imgBox">
+                        <a href="/ebooks/read/@item.BookId">
+                            <img src="~/AfpBData/@item.ImagePath" />
+                        </a>
+                    </div>
+                    <div class="details" id="filmName">
+                        <a href="/ebooks/read/@item.BookId">
+                            <h3>
+                                @item.BookTitle
+                            </h3>
+                        </a>
+                    </div>
+                    <div class="watch-container">
+                        <div class="button-group">
+                            <span>
+                                PDF
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <!-- Add Arrows -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+
+    </div>
+    <br />
+
+    <!-- Swiper Container for handling Genre Books -->
+    @foreach (var value in Model.AreaUserBooksCategories)
+    {
+        if (value.AreaUserBooks.Count != 0)
+        {
+            <br />
+            <div class="swiper-container swiper-container-book-genre">
+                <h3>@value.CategoryName</h3>
+                <div class="swiper-wrapper">
+                    @foreach (var item in value.AreaUserBooks)
+                    {
+                        <div class="swiper-slide swiper-slide-book-genre">
+                            <div class="imgBox">
+                                <a href="/ebooks/read/@item.BookId">
+                                    <img src="~/AfpBData/@item.ImagePath" />
+                                </a>
+                            </div>
+                            <div class="details" id="filmName">
+                                <a href="/ebooks/read/@item.BookId">
+                                    <h3>
+                                        @item.BookTitle
+                                    </h3>
+                                </a>
+                            </div>
+                            <div class="watch-container">
+                                <div class="button-group">
+                                    <span>
+                                        PDF
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <br />
+        }
+    }
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

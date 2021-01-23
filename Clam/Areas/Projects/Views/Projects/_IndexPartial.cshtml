@@ -1,0 +1,337 @@
+﻿@model Clam.Areas.Projects.Models.ProjectHome
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.ProjectFormData.Title)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.ProjectFormData.GithubLink)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.ProjectFormData.Status)
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.ProjectFormData.Language)
+            </th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var item in Model.AreaUserProjects)
+        {
+            <tr>
+                <td class="text-center">
+                    <a href="#" data-target="#response-@item.ProjectId" data-toggle="modal">
+                        @Html.DisplayFor(modelItem => item.Title, new { @class = "table-color-storage" })
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="response-@item.ProjectId" tabindex="-1" role="dialog" aria-labelledby="notify-@item.ProjectId" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="notify-@item.ProjectId">@item.Title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <dl class="row">
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.ProjectFormData.Author)
+                                            </dt>
+                                            <dd class="col-sm-10 text-left">
+                                                @item.Author
+                                            </dd>
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.ProjectFormData.Description)
+                                            </dt>
+                                            <dd class="col-sm-10 text-left">
+                                                @item.Description
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <footer>Last updated by : <cite>@item.Author</cite> @@ <cite>@item.LastModified</cite></footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center">
+                    <a href="#" data-target="#modaltwo-@item.ProjectId" data-toggle="modal">
+                        @Html.DisplayFor(modelItem => item.GithubLink, new { @class = "table-color-storage" })
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="modaltwo-@item.ProjectId" tabindex="-1" role="dialog" aria-labelledby="notify-@item.ProjectId" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="notify-@item.ProjectId">@item.Title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <dl class="row">
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.ProjectFormData.Status)
+                                            </dt>
+                                            <dd class="col-sm-10 text-left">
+                                                @item.Status
+                                            </dd>
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.ProjectFormData.Language)
+                                            </dt>
+                                            <dd class="col-sm-10 text-left">
+                                                @item.Language
+                                            </dd>
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => model.ProjectFormData.Description)
+                                            </dt>
+                                            <dd class="col-sm-10 text-left">
+                                                @item.Description
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <footer>Last updated by : <cite>@item.Author</cite> @@ <cite>@item.LastModified</cite></footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center">
+                    @if (item.Status == true)
+                    {
+                        <p style="color:forestgreen; font-weight:700;">Public</p>
+                    }
+                    else
+                    {
+                        <p style="color:orangered; font-weight:700;">Private</p>
+                    }
+                </td>
+                <td class="text-center">
+                    @Html.DisplayFor(modelItem => item.Language, new { @class = "table-color-storage" })
+                </td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-@item.ProjectId">
+                        Remove
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="delete-@item.ProjectId" tabindex="-1" role="dialog" aria-labelledby="notify-@item.ProjectId" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="notify-@item.ProjectId">@item.Title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this Project?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    @using (Html.BeginForm(actionName: "Remove", controllerName: "Projects", new { id = item.ProjectId }, method: FormMethod.Post))
+                                    {
+                                        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                @if (!(User.IsInRole("Admin")) || (User.IsInRole("Developer")) || (User.IsInRole("Engineer")))
+                {
+                    <td class="text-center">
+                        @Html.ActionLink("Details", "Details", "Projects", new { id = item.ProjectId }, new { @class = "btn btn-primary" })
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#update-@item.ProjectId">
+                            Update
+                        </button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="update-@item.ProjectId" tabindex="-1" role="dialog" aria-labelledby="notify-@item.ProjectId" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="notify-@item.ProjectId">@item.Title</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body text-left">
+                                        @using (Html.BeginForm(actionName: "Update", controllerName: "Projects", method: FormMethod.Post, new { enctype = "multipart/form-data", onsubmit = "AJAXSubmit(this); return false;" }))
+                                        {
+                                            @Html.ValidationSummary(message: "Astartes", htmlAttributes: new { @class = "text-danger" })
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ProjectFormData.Title, null, new { @class = "col-md-4 col-form-label control-label" })
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(model => item.Title, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => item.Title, null, new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ProjectFormData.Author, null, new { @class = "col-md-4 col-form-label control-label" })
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(model => item.Author, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => item.Author, null, new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ProjectFormData.Language, null, new { @class = "col-md-4 col-form-label control-label" })
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(model => item.Language, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => item.Language, null, new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ProjectFormData.Description, null, new { @class = "col-md-4 col-form-label control-label" })
+                                                <div class="col-md-8">
+                                                    @Html.TextAreaFor(model => item.Description, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => item.Description, null, new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ProjectFormData.GithubLink, null, new { @class = "col-md-4 col-form-label control-label" })
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(model => item.GithubLink, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => item.GithubLink, null, new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => item.ProjectId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(model => item.ProjectId, new { @class = "form-control", @hidden = "hidden" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ProjectFormData.File, null, new { @class = "col-md-4 col-form-label control-label" })
+                                                <div class="col-md-8">
+                                                    @Html.TextBoxFor(model => model.ProjectFormData.File, null, new { @class = "form-control-file border", @type = "file" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                @Html.LabelFor(model => model.ProjectFormData.Status, null, new { @class = "col-md-4 col-form-label control-label" })
+                                                <div class="col-md-8">
+                                                    @Html.DropDownListFor(model => item.Status, new SelectList(ViewBag.SelectionStatus, "Value", "Text"), new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(model => item.Status, null, new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" value="Save" class="btn btn-primary" />
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
+<br />
+<br />
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th class="text-center">
+                Interests
+            </th>
+            <th class="text-center">
+                @Html.DisplayNameFor(model => model.ProjectImageData.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody id="myTable">
+        @foreach (var item in Model.AreaUserProjectsImageInterests)
+        {
+            <tr>
+                <td class="text-center">
+                    <a href="#" data-target="#response-@item.ImageId" data-toggle="modal">
+                        @Html.DisplayFor(modelItem => item.Title, new { @class = "table-color-storage" })
+                    </a>
+                    <!-- Modal -->
+                    <div class="modal fade" id="response-@item.ImageId" tabindex="-1" role="dialog" aria-labelledby="notify-@item.ImageId" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="notify-@item.ImageId">@item.Title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div>
+                                        <dl class="row">
+                                            <dt class="col-sm-2">
+                                                @Html.DisplayNameFor(model => item.ImageLocation)
+                                            </dt>
+                                            <dd class="col-sm-10 text-left">
+                                                <img src="~/AfpPData/@item.ImageLocation" class="img-fluid" />
+                                            </dd>
+                                        </dl>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <footer>Last updated : <cite>@item.LastModified</cite></footer>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td class="text-center">
+                    @if (item.Status == true)
+                    {
+                        <p style="color:forestgreen; font-weight:700;">Public</p>
+                    }
+                    else
+                    {
+                        <p style="color:orangered; font-weight:700;">Private</p>
+                    }
+                </td>
+                <td class="text-center">
+                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-@item.ImageId">
+                        Remove
+                    </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="delete-@item.ImageId" tabindex="-1" role="dialog" aria-labelledby="notify-@item.ImageId" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="notify-@item.ImageId">@item.Title</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this Project?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    @using (Html.BeginForm(actionName: "RemoveInterests", controllerName: "Projects", new { id = item.ImageId }, method: FormMethod.Post))
+                                    {
+                                        <button type="submit" class="btn btn-danger">Confirm Delete</button>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

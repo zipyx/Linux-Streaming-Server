@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Clam.Areas.Academia.Models.SectionAcademicRegister>
+
+@{
+    ViewData["Title"] = "Academia";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Academic Categories</li>
+    </ol>
+</nav>
+@if ((User.Identity.IsAuthenticated) && ((User.IsInRole("Contributor"))
+   || (User.IsInRole("Engineer")) || (User.IsInRole("Developer")) || (User.IsInRole("Admin")) || (User.IsInRole("Owner"))))
+{
+    <p>
+        @Html.ActionLink("New Category", "CreateCategory", "Academia", null, new { @class = "btn btn-primary" })
+    </p>
+}
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            <br />
+            <h2>@item.AcademicDisciplineTitle</h2>
+            <div class="row no-gutters bg-light position-relative">
+                <div class="media-body position-static col-sm-6">
+                    <h5 class="mt-0">Description</h5>
+                    <p>@item.AcademicDisciplineDescription</p>
+                    @Html.ActionLink("Select", "Section", new { id = item.AcademicId, category = item.UrlCategory }, new { @class = "btn btn-primary stretched-link" })
+                </div>
+                <div class="media-body col-sm-6 position-relative">
+                    <dl class="row">
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => item.AcademicId)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @item.AcademicId
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => item.SubCategoryCount)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @item.SubCategoryCount
+                        </dd>
+                        <dt class="col-sm-3">
+                            @Html.DisplayNameFor(model => item.SubCategoryItemCount)
+                        </dt>
+                        <dd class="col-sm-9">
+                            @item.SubCategoryItemCount
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="card-footer">
+                @if ((User.Identity.IsAuthenticated) && ((User.IsInRole("Contributor"))
+      || (User.IsInRole("Engineer")) || (User.IsInRole("Developer")) || (User.IsInRole("Admin")) || (User.IsInRole("Owner"))))
+                {
+                    <button type="button" class="btn btn-primary float-right" data-toggle="collapse" data-target="#@item.AcademicDisciplineTitle.Replace(" ",  "")">Options</button>
+                    <div id="@item.AcademicDisciplineTitle.Replace(" ",  "")" class="collapse">
+                        @Html.ActionLink("Delete", "DeleteCategory", new { id = item.AcademicId, category = item.UrlCategory }, new { @class = "btn btn-secondary float-right" })
+                        @Html.ActionLink("Details", "CategoryDetails", new { id = item.AcademicId, category = item.UrlCategory }, new { @class = "btn btn-secondary float-right" })
+                        @Html.ActionLink("Edit", "EditCategory", new { id = item.AcademicId, category = item.UrlCategory }, new { @class = "btn btn-secondary float-right" })
+                    </div>
+                }
+                <footer class="blockquote-footer float-left">Last Modified: <cite>@item.LastModified</cite></footer>
+                <br />
+                <footer class="blockquote-footer">Added: <cite>@item.DateAdded</cite></footer>
+            </div><br />
+        </td>
+    </tr>
+}

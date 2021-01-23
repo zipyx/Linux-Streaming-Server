@@ -1,0 +1,83 @@
+﻿@model Clam.Areas.Academia.Models.SectionRegister
+
+@{
+    ViewData["Title"] = "DeleteSection";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var UrlCategory = ViewBag.UrlCategory;
+    var UrlSection = ViewBag.UrlSection;
+    var SectionName = ViewBag.SectionName;
+    var CategoryName = ViewBag.CategoryName;
+    var Name = ViewBag.Name;
+    var Aid = ViewBag.Aid;
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/academia/manage">Academic Categories</a></li>
+        <li class="breadcrumb-item"><a href="/academia/manage/@UrlCategory/list/@Aid">@CategoryName</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Remove @SectionName</li>
+    </ol>
+</nav>
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubCategoryId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubCategoryId)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubCategoryTitle)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubCategoryTitle)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.SubCategoryDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.SubCategoryDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.LastModified)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.LastModified)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateAdded)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateAdded)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AcademicId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AcademicId)
+        </dd>
+    </dl>
+    @using (Html.BeginForm(actionName: "DeleteSection", "Academia", method: FormMethod.Post, new { id = Aid, category = UrlCategory, section = UrlSection }))
+    {
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        @Html.ValidationSummary(message: "Ensure Field is filled in by specific requirements.", htmlAttributes: new { @class = "text-danger" })
+        <div class="form-group row">
+            @Html.LabelFor(model => model.SubCategoryId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.SubCategoryId, null, new { @class = "form-control", @hidden = "hidden" })
+                @Html.ValidationMessageFor(model => model.SubCategoryId, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.AcademicId, null, new { @class = "col-md-4 col-form-label control-label", @hidden = "hidden" })
+            <div class="col-md-8">
+                @Html.TextBoxFor(model => model.AcademicId, null, new { @class = "form-control", @hidden = "hidden" })
+                @Html.ValidationMessageFor(model => model.AcademicId, null, new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        </div>
+    }
+</div>

@@ -1,0 +1,102 @@
+﻿@model Clam.Areas.TVShows.Models.StreamTVShowFileUploadDatabase
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Episodes[0].ItemTitle)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Episodes)
+        {
+            <tr>
+                <td>
+                    <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0">
+                                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-@item.ItemId" aria-expanded="false" aria-controls="collapseOne">
+                                        <div class="row ml-1">
+                                            <div>
+                                                @item.ItemTitle
+                                            </div>
+                                        </div>
+                                        <div class="float-right">
+                                            @item.DateCreated
+                                        </div>
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapse-@item.ItemId" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                <div class="card-body">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center">
+                                                    <code>Delete</code> PhysicalStream
+                                                </th>
+                                                <th class="text-center">
+                                                    @Html.DisplayNameFor(model => model.Episodes[0].Size)
+                                                </th>
+                                                <th class="text-center">
+                                                    Video
+                                                </th>
+                                                <th class="text-center">
+                                                    <code>FileStreamResult</code> [Data]
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="text-center">
+                                                    <!-- Button trigger modal -->
+                                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal-@item.ItemId">
+                                                        Delete
+                                                    </button>
+
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" id="modal-@item.ItemId" tabindex="-1" role="dialog" aria-labelledby="notify-@item.ItemId" aria-hidden="true">
+                                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title" id="notify-@item.ItemId">@item.ItemTitle</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    Are you sure you want to delete this episode?
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    <input type="button" name="name" value="Confirm Delete" class="btn btn-danger" onclick="location.href='@Url.ActionLink("DeleteFile", "TVShow", new { id = item.ItemId, category = item.UrlCategory, section = item.UrlSection, subsection = item.UrlSubSection })'" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="text-center">
+                                                    @Html.DisplayFor(modelItem => item.Size)
+                                                </td>
+                                                <td class="text-center">
+                                                    @Html.ActionLink("Watch", "Video", "TVShow", new { id = item.CategoryId, show = item.TVShowId, season = item.SeasonId, data = item.ItemId, category = item.UrlCategory, section = item.UrlSection, subsection = item.UrlSubSection, subsectionitem = item.UrlSubSectionItem }, new { @class = "btn btn-success" })
+                                                </td>
+                                                <td class="text-center">
+                                                    @Html.ActionLink("Download", "DownloadFile", "TVShow", new { id = item.ItemId })
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>

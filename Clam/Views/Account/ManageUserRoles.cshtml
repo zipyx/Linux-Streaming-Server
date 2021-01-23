@@ -1,0 +1,62 @@
+﻿@model List<Clam.Models.AccountUserRoles>
+@{ var UserId = ViewBag.UserId;}
+@{
+    ViewData["Title"] = "ManageUserRoles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>User Role Management</h1>
+
+<br />
+<hr />
+@using (Html.BeginForm("ManageUserRoles", "Account", FormMethod.Post))
+{
+    <div class="card">
+        <div class="card-header">
+            <h3>Manage User Roles</h3>
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Select
+                        </th>
+                        <th>
+                            Role Name
+                        </th>
+                        <th>
+                            Role Identification
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.CheckBoxFor(modelItem => Model[i].IsSelected)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model[i].RoleName)
+                                @Html.HiddenFor(modelItem => Model[i].RoleName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => Model[i].RoleId)
+                            </td>
+                            <td>
+                                @Html.HiddenFor(modelItem => Model[i].UserId, new { @class = "form-control"})
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            @Html.ActionLink("Back", "Edit", new { Id = UserId}, new { @class = "btn btn-warning" })
+            <input type="submit" value="Update" class="btn btn-primary" style="width:auto" />
+        </div>
+    </div>
+}
+
